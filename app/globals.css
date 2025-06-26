@@ -117,4 +117,14 @@ img {
   transform: translateZ(0);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+}
+
+/* Custom gradient utilities for logo glow effects */
+.bg-gradient-radial {
+  background: radial-gradient(circle, var(--tw-gradient-stops));
+}
+
+/* Additional blur utilities */
+.blur-xs {
+  filter: blur(2px);
 } 

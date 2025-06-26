@@ -5,6 +5,13 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { motion } from "framer-motion";
 
+const GradientTech = ({ children }) => (
+  <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent font-semibold">{children}</span>
+);
+const GradientKeyword = ({ children }) => (
+  <span className="bg-gradient-to-r from-purple-500 via-blue-500 to-white bg-clip-text text-transparent font-semibold">{children}</span>
+);
+
 const Home = () => {
   useEffect(() => {
     // Initialize AOS
@@ -26,30 +33,30 @@ const Home = () => {
 
   const categories = [
     {
-      title: "Development",
+      title: <GradientTech>Development</GradientTech>,
       items: [
-        "Full-Stack Web Development",
-        "Mobile-First Responsive Design",
-        "Cross-Platform Compatibility",
-        "Performance Optimization"
+        <><GradientKeyword>Full-Stack</GradientKeyword> Web Development</>,
+        <><GradientKeyword>Mobile-First</GradientKeyword> Responsive Design</>,
+        <><GradientKeyword>Cross-Platform</GradientKeyword> Compatibility</>,
+        <><GradientKeyword>Performance</GradientKeyword> Optimization</>
       ]
     },
     {
-      title: "Technical",
+      title: <GradientTech>Technical</GradientTech>,
       items: [
-        "Modern Framework Implementation",
-        "API Integration & Development",
-        "Database Architecture",
-        "Cloud Services Management"
+        <><GradientKeyword>Modern Framework</GradientKeyword> Implementation</>,
+        <><GradientTech>API</GradientTech> Integration & Development</>,
+        <><GradientKeyword>Database</GradientKeyword> Architecture</>,
+        <><GradientKeyword>Cloud Services</GradientKeyword> Management</>
       ]
     },
     {
-      title: "Professional",
+      title: <GradientTech>Professional</GradientTech>,
       items: [
-        "Project Management",
-        "Technical Documentation",
-        "Team Collaboration",
-        "Problem-Solving"
+        <><GradientKeyword>Project Management</GradientKeyword></>,
+        <><GradientKeyword>Technical Documentation</GradientKeyword></>,
+        <><GradientKeyword>Team Collaboration</GradientKeyword></>,
+        <><GradientKeyword>Problem-Solving</GradientKeyword></>
       ]
     }
   ];
@@ -73,8 +80,7 @@ const Home = () => {
         {/* Main gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-gray-800/90 via-gray-900/95 to-black/90"></div>
         
-        {/* Subtle grid pattern for depth */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f1a_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f1a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
+
         
         {/* Radial gradient for depth */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gray-800/80 via-gray-900/90 to-black/95"></div>
@@ -105,27 +111,13 @@ const Home = () => {
                 transition={{ duration: 1, delay: 1.2 }}
                 className="w-full backdrop-blur-sm bg-gray-900/30 p-3 sm:p-4 rounded-2xl"
               >
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white whitespace-normal">
-                  <span className="block mb-2 sm:mb-4">Full-Stack</span>
-                  <span className="block text-cyan-400 font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-tight leading-tight">
-                    Software<br />Engineer
-                  </span>
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-signature font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent whitespace-normal">
+                  Brian
                 </h1>
+                <h2 className="mt-2 text-xl sm:text-2xl md:text-3xl font-semibold bg-gradient-to-r from-purple-500 via-blue-500 to-white bg-clip-text text-transparent">
+                  Full-Stack Software Engineer
+                </h2>
               </motion.div>
-
-              <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 1.6 }}
-                className="max-w-md text-base sm:text-lg md:text-xl text-gray-100 leading-relaxed backdrop-blur-sm bg-gray-900/30 p-3 sm:p-4 rounded-2xl mx-auto"
-              >
-                Welcome to my <span className="text-cyan-300">full-stack portfolio</span>! 
-                I specialize in building <span className="text-cyan-300">dynamic</span>,{' '}
-                <span className="text-blue-300">interactive</span>, and{' '}
-                <span className="text-cyan-300">user-friendly</span> web applications spanning 
-                both the <span className="text-cyan-300">front-end</span> and{' '}
-                <span className="text-cyan-300">back-end</span>.
-              </motion.p>
             </div>
           </motion.div>
 
@@ -182,48 +174,77 @@ const Home = () => {
         <motion.div 
           initial={{ opacity: 0, y: 100 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "-20px 0px -200px 0px" }}
           transition={{ 
             duration: 0.8,
             ease: [0.22, 1, 0.36, 1]
           }}
-          className="mt-16 sm:mt-20 grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8"
+          className="mt-16 sm:mt-20 grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto"
         >
           {categories.map((category, index) => (
             <motion.div
-              key={category.title}
+              key={index}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
+              viewport={{ once: true, margin: "-20px 0px -150px 0px" }}
               transition={{ 
                 duration: 0.6,
-                delay: 0.2,
+                delay: index * 0.2,
                 ease: [0.22, 1, 0.36, 1]
               }}
-              className="backdrop-blur-sm bg-gray-900/30 p-6 rounded-2xl"
+              className="backdrop-blur-sm bg-gray-900/30 p-4 sm:p-6 rounded-2xl h-full flex flex-col"
             >
-              <h3 className="text-xl sm:text-2xl font-bold text-cyan-400 mb-4">{category.title}</h3>
-              <ul className="space-y-3">
-                {category.items.map((item, itemIndex) => (
-                  <motion.li
-                    key={item}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-50px" }}
-                    transition={{ 
-                      duration: 0.4,
-                      delay: 0.1 * itemIndex,
-                      ease: [0.22, 1, 0.36, 1]
-                    }}
-                    className="flex items-center text-gray-200"
-                  >
-                    <span className="text-cyan-400 mr-2">•</span>
-                    {item}
-                  </motion.li>
-                ))}
-              </ul>
+              <h3 className="text-lg sm:text-xl lg:text-2xl font-bold mb-4 text-center">{category.title}</h3>
+              <div className="flex-1 flex justify-center">
+                <ul className="space-y-2 sm:space-y-3 w-full max-w-xs">
+                  {category.items.map((item, itemIndex) => (
+                    <motion.li 
+                      key={itemIndex}
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true, margin: "-10px 0px -50px 0px" }}
+                      transition={{ 
+                        duration: 0.4,
+                        delay: (index * 0.2) + (itemIndex * 0.1),
+                        ease: [0.22, 1, 0.36, 1]
+                      }}
+                      className="flex items-start text-gray-300 text-sm sm:text-base lg:text-lg"
+                    >
+                      <span className="mr-3 flex-shrink-0 mt-1">
+                        <span className="w-1.5 h-1.5 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full inline-block"></span>
+                      </span>
+                      <span className="leading-relaxed text-left flex-1">{item}</span>
+                    </motion.li>
+                  ))}
+                </ul>
+              </div>
             </motion.div>
           ))}
+        </motion.div>
+
+        {/* Call to Action */}
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px 0px -100px 0px" }}
+          transition={{ 
+            duration: 0.8,
+            delay: 0.6,
+            ease: [0.22, 1, 0.36, 1]
+          }}
+          className="text-center mt-16 sm:mt-20"
+        >
+          <Link
+            to="portfolio"
+            smooth
+            duration={500}
+            className="group flex items-center text-white bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-3 my-2 mx-auto rounded-md cursor-pointer capitalize font-medium w-fit hover:scale-105 duration-200 transition-all"
+          >
+            <GradientKeyword>View Portfolio</GradientKeyword>
+            <span className="group-hover:rotate-90 duration-300">
+              <MdOutlineKeyboardArrowRight size={25} className="ml-1" />
+            </span>
+          </Link>
         </motion.div>
       </div>
     </motion.section>

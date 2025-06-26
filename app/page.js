@@ -1,9 +1,8 @@
 'use client'
 
-import React from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import About from "../src/components/About";
 import TechStack from "../src/components/TechStack";
 import Home from "../src/components/Home";
 import NavBar from "../src/components/NavBar";
@@ -11,8 +10,10 @@ import Portfolio from "../src/components/Portfolio";
 import GlowingLogo from "../src/components/GlowingLogo";
 import StickyGlowingLogo from "../src/components/StickyGlowingLogo";
 import { AnimationProvider, pageTransition } from "../src/context/AnimationContext";
+// import bkinclogo from "../public/assets/bkinclogo.png";
 
 export default function HomePage() {
+  const [isMainLogoActive, setIsMainLogoActive] = useState(false);
   return (
     <AnimationProvider>
       <motion.div
@@ -32,8 +33,7 @@ export default function HomePage() {
           {/* Main gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-br from-gray-800/90 via-gray-900/95 to-black/90"></div>
           
-          {/* Subtle grid pattern for depth */}
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f1a_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f1a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
+
           
           {/* Radial gradient for depth */}
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gray-800/80 via-gray-900/90 to-black/95"></div>
@@ -47,6 +47,7 @@ export default function HomePage() {
         </div>
 
         <NavBar />
+        <GlowingLogo />
         <main className="relative">
           <section id="home">
             <motion.div
@@ -58,16 +59,7 @@ export default function HomePage() {
               <Home />
             </motion.div>
           </section>
-          <section id="about">
-            <motion.div
-              variants={pageTransition}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-            >
-              <About />
-            </motion.div>
-          </section>
+
           <section id="techstack">
             <motion.div
               variants={pageTransition}
@@ -78,104 +70,73 @@ export default function HomePage() {
               <TechStack />
             </motion.div>
           </section>
-          <section id="logo" className="relative w-full py-16 pb-48 bg-gradient-to-b from-gray-900 to-black">
+          <section id="logo" className="relative w-full py-16 bg-gradient-to-b from-gray-900 to-black">
             <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-              <motion.div 
-                initial={{ opacity: 0, y: 100 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ 
-                  duration: 0.8,
-                  type: "spring",
-                  stiffness: 50,
-                  damping: 15,
-                  ease: [0.22, 1, 0.36, 1]
-                }}
-                viewport={{ once: true, margin: "-100px" }}
-                className="flex flex-col items-center justify-center space-y-4"
-              >
-                <motion.div 
-                  className="relative group"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  transition={{ 
-                    type: "spring",
-                    stiffness: 400,
-                    damping: 17
-                  }}
+              <div className="flex flex-col items-center justify-center">
+                {/* BK Inc Logo */}
+                <motion.div
+                  className="relative group flex justify-center items-center mb-8"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  {/* Animated background glow effect */}
-                  <motion.div 
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                    initial={false}
-                    animate={{
-                      scale: [1, 1.2, 1],
-                      opacity: [0, 0.5, 0]
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }}
+                  <div 
+                    className="relative group flex justify-center items-center cursor-pointer"
+                    onClick={() => setIsMainLogoActive(!isMainLogoActive)}
                   >
-                    <div className="absolute inset-[-10px] bg-gradient-to-r from-blue-500/40 via-cyan-500/40 to-blue-500/40 rounded-full blur-xl"></div>
-                    <div className="absolute inset-[-5px] bg-gradient-to-r from-blue-400/30 via-cyan-400/30 to-blue-400/30 rounded-full blur-lg"></div>
-                  </motion.div>
-
-                  {/* Pulsing ring effect */}
-                  <motion.div 
-                    className="absolute inset-[-2px] rounded-full"
-                    initial={false}
-                    animate={{
-                      scale: [1, 1.1, 1],
-                      opacity: [0.5, 0.2, 0.5]
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      ease: "easeInOut"
-                    }}
-                  >
-                    <div className="absolute inset-0 border-2 border-blue-500/30 rounded-full"></div>
-                  </motion.div>
-                  
-                  {/* Logo with hover effect */}
-                  <motion.div className="relative z-10">
-                    <img 
+                    {/* Clean circular background */}
+                    <div className="relative w-32 h-32 rounded-full">
+                      {/* Soft background circle */}
+                      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-gray-800/40 via-gray-900/60 to-black/80 shadow-lg backdrop-blur-sm"></div>
+                      
+                      {/* Single clean border */}
+                      <div className="absolute inset-0 rounded-full border border-gray-600/30"></div>
+                      
+                      {/* Soft inner glow */}
+                      <div className="absolute inset-[2px] rounded-full bg-gradient-to-br from-gray-700/20 to-transparent"></div>
+                      
+                      {/* Active state lighting - contained within circle */}
+                      <div className={`absolute inset-0 rounded-full transition-all duration-500 overflow-hidden ${
+                        isMainLogoActive 
+                          ? 'border border-gray-400/50' 
+                          : ''
+                      }`}>
+                        {/* Linear gradient grey when active */}
+                        <div className={`absolute inset-0 rounded-full transition-all duration-500 ${
+                          isMainLogoActive 
+                            ? 'bg-gradient-to-br from-gray-300/20 via-gray-400/15 to-gray-600/10' 
+                            : ''
+                        }`}></div>
+                      </div>
+                      
+                      {/* Hover state */}
+                      <div className={`absolute inset-0 rounded-full transition-all duration-300 ${
+                        !isMainLogoActive 
+                          ? 'group-hover:bg-gradient-to-br group-hover:from-gray-700/15 group-hover:to-transparent' 
+                          : ''
+                      }`}></div>
+                    </div>
+                    
+                    {/* Logo - positioned absolutely to stay centered */}
+                    <Image 
                       src="/assets/bkinclogo.png"
                       alt="BKINC Logo" 
-                      width="128"
-                      height="128"
-                      className="w-32 h-auto transition-all duration-500 
-                               group-hover:brightness-125 group-hover:contrast-125
-                               group-hover:drop-shadow-[0_0_15px_rgba(59,130,246,0.5)]
-                               group-active:brightness-150 group-active:contrast-150"
-                      style={{
-                        filter: "drop-shadow(0 0 8px rgba(59,130,246,0.3))"
-                      }}
+                      width={112}
+                      height={112}
+                      className={`absolute w-28 h-auto z-10 transition-all duration-500 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ${
+                        isMainLogoActive 
+                          ? 'brightness-130 contrast-115 drop-shadow-[0_0_15px_rgba(156,163,175,0.5)]' 
+                          : 'brightness-100 contrast-105 group-hover:brightness-110 group-hover:contrast-108'
+                      }`}
                     />
-                  </motion.div>
-
-                  {/* Interactive touch feedback for mobile */}
-                  <motion.div 
-                    className="absolute inset-0 rounded-full bg-white/5 opacity-0 group-hover:opacity-100 group-active:opacity-0"
-                    initial={false}
-                    whileTap={{
-                      scale: 0.9,
-                      opacity: 0.2,
-                      transition: { duration: 0.1 }
-                    }}
-                  />
+                  </div>
                 </motion.div>
-
-                <motion.p 
-                  className="text-lg text-white font-medium"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.3 }}
-                >
+                
+                {/* Tagline */}
+                <p className="text-gray-400 text-xs sm:text-sm md:text-base text-center font-light tracking-wider">
                   Crafting Digital Excellence
-                </motion.p>
-              </motion.div>
+                </p>
+              </div>
             </div>
           </section>
           <section id="portfolio">
@@ -187,9 +148,9 @@ export default function HomePage() {
             >
               <Portfolio />
             </motion.div>
-          </section>
+                    </section>
+          <StickyGlowingLogo />
         </main>
-        <StickyGlowingLogo />
       </motion.div>
     </AnimationProvider>
   );
