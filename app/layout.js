@@ -5,41 +5,41 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
   metadataBase: new URL('https://www.briankarmo.com'),
-  title: 'Brian Karmo | Software Developer',
-  description: 'Explore Brian Karmo\'s portfolio, showcasing full‑scale projects and modern software development using Shopify Liquid, React, and Next.js. Available for hire on Upwork.',
-  keywords: 'Brian Karmo, software developer, full‑scale projects, web development, React, Next.js, Shopify Liquid, JavaScript, Tailwind CSS, Upwork freelancer',
-  author: 'Brian Karmo',
+  title: 'Brian | Software Developer',
+  description: 'Explore Brian\'s portfolio, showcasing full‑scale projects and modern software development using Shopify Liquid, React, and Next.js.',
+  keywords: 'Brian, software developer, full‑scale projects, web development, React, Next.js, Shopify Liquid, JavaScript, Tailwind CSS',
+  author: 'Brian',
   openGraph: {
     type: 'website',
-    title: 'Brian Karmo | Software Developer',
-    description: 'Explore Brian Karmo\'s portfolio, showcasing full‑scale projects and modern software development using Shopify Liquid, React, and Next.js. Available for hire on Upwork.',
-    url: 'https://www.briankarmo.com/',
-    siteName: 'Brian Karmo Portfolio',
+    title: 'Brian | Software Developer',
+    description: 'Explore Brian\'s portfolio, showcasing full‑scale projects and modern software development using Shopify Liquid, React, and Next.js.',
+    url: 'https://brian-portfolio.com/',
+    siteName: 'Brian Portfolio',
     images: [
       {
         url: '/heroImage-1200x630.png',
         width: 1200,
         height: 630,
-        alt: 'Brian Karmo - Software Developer',
+        alt: 'Brian - Software Developer',
       },
       {
         url: '/heroImage-600x315.png',
         width: 600,
         height: 315,
-        alt: 'Brian Karmo - Software Developer',
+        alt: 'Brian - Software Developer',
       }
     ],
     locale: 'en_US',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Brian Karmo | Software Developer',
-    description: 'Explore Brian Karmo\'s portfolio, showcasing full‑scale projects and modern software development using Shopify Liquid, React, and Next.js.',
-    creator: '@briankarmo',
+    title: 'Brian | Software Developer',
+    description: 'Explore Brian\'s portfolio, showcasing full‑scale projects and modern software development using Shopify Liquid, React, and Next.js.',
+    creator: '@brian',
     images: [
       {
         url: '/heroImage-1200x630.png',
-        alt: 'Brian Karmo - Software Developer',
+        alt: 'Brian - Software Developer',
       }
     ],
   },
@@ -90,10 +90,10 @@ export default function RootLayout({ children }) {
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:type" content="image/png" />
-        <meta property="og:image:alt" content="Brian Karmo - Software Developer" />
+        <meta property="og:image:alt" content="Brian - Software Developer" />
         
         {/* Twitter specific meta tags */}
-        <meta name="twitter:image:alt" content="Brian Karmo - Software Developer" />
+        <meta name="twitter:image:alt" content="Brian - Software Developer" />
         
         {/* Preload critical images */}
         <link rel="preload" as="image" href="/heroImage.png" />
