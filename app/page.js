@@ -1,19 +1,24 @@
 'use client'
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
+import About from "../src/components/About";
 import TechStack from "../src/components/TechStack";
 import Home from "../src/components/Home";
 import NavBar from "../src/components/NavBar";
 import Portfolio from "../src/components/Portfolio";
+
 import GlowingLogo from "../src/components/GlowingLogo";
 import StickyGlowingLogo from "../src/components/StickyGlowingLogo";
 import { AnimationProvider, pageTransition } from "../src/context/AnimationContext";
-// import bkinclogo from "../public/assets/bkinclogo.png";
 
 export default function HomePage() {
-  const [isMainLogoActive, setIsMainLogoActive] = useState(false);
+  const [logoActive, setLogoActive] = useState(false);
+
+  const toggleLogo = () => {
+    setLogoActive(!logoActive);
+  };
   return (
     <AnimationProvider>
       <motion.div
@@ -33,7 +38,8 @@ export default function HomePage() {
           {/* Main gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-br from-gray-800/90 via-gray-900/95 to-black/90"></div>
           
-
+          {/* Subtle grid pattern for depth */}
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f1a_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f1a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
           
           {/* Radial gradient for depth */}
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gray-800/80 via-gray-900/90 to-black/95"></div>
@@ -59,7 +65,16 @@ export default function HomePage() {
               <Home />
             </motion.div>
           </section>
-
+          <section id="about">
+            <motion.div
+              variants={pageTransition}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+            >
+              <About />
+            </motion.div>
+          </section>
           <section id="techstack">
             <motion.div
               variants={pageTransition}
@@ -81,52 +96,62 @@ export default function HomePage() {
                   transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                 >
                   <div 
-                    className="relative group flex justify-center items-center cursor-pointer"
-                    onClick={() => setIsMainLogoActive(!isMainLogoActive)}
+                    className="relative flex justify-center items-center cursor-pointer"
+                    onClick={toggleLogo}
                   >
-                    {/* Clean circular background */}
-                    <div className="relative w-32 h-32 rounded-full">
-                      {/* Soft background circle */}
-                      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-gray-800/40 via-gray-900/60 to-black/80 shadow-lg backdrop-blur-sm"></div>
-                      
-                      {/* Single clean border */}
-                      <div className="absolute inset-0 rounded-full border border-gray-600/30"></div>
-                      
-                      {/* Soft inner glow */}
-                      <div className="absolute inset-[2px] rounded-full bg-gradient-to-br from-gray-700/20 to-transparent"></div>
-                      
-                      {/* Active state lighting - contained within circle */}
-                      <div className={`absolute inset-0 rounded-full transition-all duration-500 overflow-hidden ${
-                        isMainLogoActive 
-                          ? 'border border-gray-400/50' 
-                          : ''
-                      }`}>
-                        {/* Linear gradient grey when active */}
-                        <div className={`absolute inset-0 rounded-full transition-all duration-500 ${
-                          isMainLogoActive 
-                            ? 'bg-gradient-to-br from-gray-300/20 via-gray-400/15 to-gray-600/10' 
-                            : ''
-                        }`}></div>
-                      </div>
-                      
-                      {/* Hover state */}
-                      <div className={`absolute inset-0 rounded-full transition-all duration-300 ${
-                        !isMainLogoActive 
-                          ? 'group-hover:bg-gradient-to-br group-hover:from-gray-700/15 group-hover:to-transparent' 
-                          : ''
-                      }`}></div>
-                    </div>
+                    {/* 3D Liquid container outer shell */}
+                    <div className={`absolute inset-[-8px] rounded-full backdrop-blur-sm transition-all duration-500 aspect-square ${
+                      logoActive 
+                        ? 'bg-gradient-to-br from-blue-300/20 via-blue-800/40 to-blue-950/60 shadow-[inset_0_2px_8px_rgba(0,0,0,0.3),inset_0_-2px_8px_rgba(255,255,255,0.1),0_0_30px_rgba(255,255,255,0.3)]' 
+                        : 'bg-gradient-to-br from-blue-400/15 via-blue-800/30 to-blue-950/50 shadow-[inset_0_2px_6px_rgba(0,0,0,0.2),inset_0_-2px_6px_rgba(255,255,255,0.05)] hover:shadow-[inset_0_2px_8px_rgba(0,0,0,0.3),inset_0_-2px_8px_rgba(255,255,255,0.1),0_0_20px_rgba(255,255,255,0.2)]'
+                    }`}></div>
                     
-                    {/* Logo - positioned absolutely to stay centered */}
+                    {/* Liquid depth layer */}
+                    <div className={`absolute inset-[-6px] rounded-full transition-all duration-500 aspect-square ${
+                      logoActive 
+                        ? 'shadow-[inset_0_3px_6px_rgba(0,0,0,0.4)]' 
+                        : 'shadow-[inset_0_2px_4px_rgba(0,0,0,0.3)]'
+                    }`} style={{
+                      background: logoActive 
+                        ? 'radial-gradient(circle at center, rgba(37, 99, 235, 0.3) 0%, rgba(30, 64, 175, 0.4) 50%, rgba(23, 37, 84, 0.5) 100%)'
+                        : 'radial-gradient(circle at center, rgba(29, 78, 216, 0.2) 0%, rgba(30, 64, 175, 0.3) 50%, rgba(23, 37, 84, 0.4) 100%)'
+                    }}></div>
+                    
+                    {/* Top highlight - light reflection on liquid surface */}
+                    <div className={`absolute inset-[-8px] rounded-full transition-all duration-500 ${
+                      logoActive 
+                        ? 'bg-gradient-to-b from-white/25 via-transparent to-transparent opacity-100' 
+                        : 'bg-gradient-to-b from-white/15 via-transparent to-transparent opacity-70 hover:opacity-90 hover:from-white/20'
+                    }`} style={{
+                      clipPath: 'circle(100% at 50% 25%)'
+                    }}></div>
+                    
+                    {/* Container rim/border */}
+                    <div className={`absolute inset-[-8px] rounded-full border-2 transition-all duration-500 aspect-square ${
+                      logoActive 
+                        ? 'border-blue-400/60 shadow-[0_0_15px_rgba(59,130,246,0.4)]' 
+                        : 'border-blue-600/40 hover:border-blue-500/50 hover:shadow-[0_0_10px_rgba(59,130,246,0.2)]'
+                    }`}></div>
+                    
+                    {/* Bottom depth shadow */}
+                    <div className={`absolute inset-[-8px] rounded-full transition-all duration-500 ${
+                      logoActive 
+                        ? 'bg-gradient-to-t from-blue-950/40 via-transparent to-transparent opacity-100' 
+                        : 'bg-gradient-to-t from-blue-950/30 via-transparent to-transparent opacity-80 hover:opacity-90'
+                    }`} style={{
+                      clipPath: 'circle(100% at 50% 75%)'
+                    }}></div>
+                    
+                    {/* Logo */}
                     <Image 
                       src="/assets/bkinclogo.png"
                       alt="BKINC Logo" 
-                      width={112}
-                      height={112}
-                      className={`absolute w-28 h-auto z-10 transition-all duration-500 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ${
-                        isMainLogoActive 
-                          ? 'brightness-130 contrast-115 drop-shadow-[0_0_15px_rgba(156,163,175,0.5)]' 
-                          : 'brightness-100 contrast-105 group-hover:brightness-110 group-hover:contrast-108'
+                      width={128}
+                      height={128}
+                      className={`w-32 h-auto relative z-10 transition-all duration-300 ${
+                        logoActive 
+                          ? 'scale-105 brightness-110' 
+                          : 'hover:scale-105'
                       }`}
                     />
                   </div>
@@ -148,7 +173,8 @@ export default function HomePage() {
             >
               <Portfolio />
             </motion.div>
-                    </section>
+          </section>
+
           <StickyGlowingLogo />
         </main>
       </motion.div>
