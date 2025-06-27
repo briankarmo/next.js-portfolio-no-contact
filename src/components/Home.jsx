@@ -4,6 +4,7 @@ import { Link } from "react-scroll";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const GradientTech = ({ children }) => (
   <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent font-semibold">{children}</span>
@@ -80,7 +81,8 @@ const Home = () => {
         {/* Main gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-gray-800/90 via-gray-900/95 to-black/90"></div>
         
-
+        {/* Subtle grid pattern for depth */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f1a_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f1a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
         
         {/* Radial gradient for depth */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gray-800/80 via-gray-900/90 to-black/95"></div>
@@ -141,20 +143,13 @@ const Home = () => {
               
               {/* Image container */}
               <div className="relative block w-full max-w-md lg:max-w-lg">
-                <img
+                <Image
                   src="/assets/heroimage.png"
                   alt="Hero"
                   width={600}
                   height={600}
                   className="w-full h-auto rounded-2xl transform transition duration-500 hover:scale-[1.02] relative z-10"
-                  loading="eager"
-                  decoding="async"
-                  onError={(e) => {
-                    // Fallback to alternative image if main one fails
-                    if (e.target.src !== '/assets/heroImage.png') {
-                      e.target.src = '/assets/heroImage.png';
-                    }
-                  }}
+                  priority
                   style={{
                     backfaceVisibility: 'hidden',
                     WebkitBackfaceVisibility: 'hidden',
@@ -174,76 +169,83 @@ const Home = () => {
         <motion.div 
           initial={{ opacity: 0, y: 100 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-20px 0px -200px 0px" }}
+          viewport={{ once: true, margin: "-100px" }}
           transition={{ 
             duration: 0.8,
             ease: [0.22, 1, 0.36, 1]
           }}
-          className="mt-16 sm:mt-20 grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto"
+          className="mt-16 sm:mt-20 grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto px-4"
         >
           {categories.map((category, index) => (
             <motion.div
-              key={index}
+              key={category.title}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-20px 0px -150px 0px" }}
+              viewport={{ once: true, margin: "-50px" }}
               transition={{ 
                 duration: 0.6,
-                delay: index * 0.2,
+                delay: 0.2,
                 ease: [0.22, 1, 0.36, 1]
               }}
-              className="backdrop-blur-sm bg-gray-900/30 p-4 sm:p-6 rounded-2xl h-full flex flex-col"
+              className="backdrop-blur-sm bg-gray-900/30 p-4 sm:p-6 rounded-2xl h-full flex flex-col w-full max-w-md mx-auto md:max-w-none"
             >
               <h3 className="text-lg sm:text-xl lg:text-2xl font-bold mb-4 text-center">{category.title}</h3>
-              <div className="flex-1 flex justify-center">
-                <ul className="space-y-2 sm:space-y-3 w-full max-w-xs">
-                  {category.items.map((item, itemIndex) => (
-                    <motion.li 
-                      key={itemIndex}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true, margin: "-10px 0px -50px 0px" }}
-                      transition={{ 
-                        duration: 0.4,
-                        delay: (index * 0.2) + (itemIndex * 0.1),
-                        ease: [0.22, 1, 0.36, 1]
-                      }}
-                      className="flex items-start text-gray-300 text-sm sm:text-base lg:text-lg"
-                    >
-                      <span className="mr-3 flex-shrink-0 mt-1">
-                        <span className="w-1.5 h-1.5 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full inline-block"></span>
-                      </span>
-                      <span className="leading-relaxed text-left flex-1">{item}</span>
-                    </motion.li>
-                  ))}
-                </ul>
-              </div>
+              <ul className="space-y-2 sm:space-y-3 flex-1 max-w-xs mx-auto md:max-w-none">
+                {category.items.map((item, itemIndex) => (
+                  <motion.li
+                    key={itemIndex}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ 
+                      duration: 0.4,
+                      delay: 0.1 * itemIndex,
+                      ease: [0.22, 1, 0.36, 1]
+                    }}
+                    className="flex items-start text-gray-200 text-sm sm:text-base"
+                  >
+                    <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent flex-shrink-0 text-lg mr-3 mt-0.5 w-4">•</span>
+                    <span className="leading-relaxed flex-1">{item}</span>
+                  </motion.li>
+                ))}
+              </ul>
             </motion.div>
           ))}
         </motion.div>
 
-        {/* Call to Action */}
+        {/* Portfolio CTA Button */}
         <motion.div 
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px 0px -100px 0px" }}
+          viewport={{ once: true, margin: "-100px" }}
           transition={{ 
             duration: 0.8,
-            delay: 0.6,
+            delay: 0.3,
             ease: [0.22, 1, 0.36, 1]
           }}
-          className="text-center mt-16 sm:mt-20"
+          className="mt-16 sm:mt-20 flex justify-center"
         >
           <Link
             to="portfolio"
-            smooth
+            smooth={true}
             duration={500}
-            className="group flex items-center text-white bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-3 my-2 mx-auto rounded-md cursor-pointer capitalize font-medium w-fit hover:scale-105 duration-200 transition-all"
+            className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-medium cursor-pointer"
           >
-            <GradientKeyword>View Portfolio</GradientKeyword>
-            <span className="group-hover:rotate-90 duration-300">
-              <MdOutlineKeyboardArrowRight size={25} className="ml-1" />
-            </span>
+            {/* Button Background with Gradient Border */}
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-lg"></div>
+            <div className="absolute inset-[1px] bg-gradient-to-br from-gray-900/90 via-gray-900/95 to-black/90 rounded-lg"></div>
+            
+            {/* Button Content */}
+            <div className="relative flex items-center space-x-2 text-white group-hover:text-cyan-100 transition-colors duration-300">
+              <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent group-hover:from-white group-hover:to-cyan-100">
+                View Portfolio
+              </span>
+              <MdOutlineKeyboardArrowRight 
+                size={24} 
+                className="transform group-hover:translate-x-1 transition-transform duration-300 text-cyan-400 group-hover:text-white" 
+              />
+            </div>
           </Link>
         </motion.div>
       </div>

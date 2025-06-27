@@ -198,22 +198,22 @@ const navVariants = {
   visible: { 
     opacity: 1, 
     y: 0,
-    transition: { 
-      duration: 0.8,
-      ease: [0.22, 1, 0.36, 1]
+    transition: {
+      duration: 0.5,
+      ease: [0.16, 1, 0.3, 1]
     }
   }
 };
 
 const linkVariants = {
-  hidden: { opacity: 0, y: -10 },
-  visible: (i) => ({
+  hidden: { opacity: 0, y: -20 },
+  visible: (index) => ({
     opacity: 1,
     y: 0,
     transition: {
-      delay: i * 0.1 + 0.5,
-      duration: 0.6,
-      ease: [0.22, 1, 0.36, 1]
+      delay: index * 0.1,
+      duration: 0.5,
+      ease: [0.16, 1, 0.3, 1]
     }
   })
 };

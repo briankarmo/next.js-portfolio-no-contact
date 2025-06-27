@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 const GlowingLogo = () => {
   const [isActive, setIsActive] = useState(false);
@@ -20,11 +21,11 @@ const GlowingLogo = () => {
         onClick={handleClick}
       >
         {/* Simple logo without metallic background */}
-        <img 
+        <Image 
           src="/assets/bkinclogo.png"
           alt="BKINC Logo" 
-          width="112"
-          height="112"
+          width={112}
+          height={112}
           className="w-28 h-auto"
         />
       </div>

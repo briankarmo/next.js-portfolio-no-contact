@@ -28,17 +28,7 @@ const About = () => {
         </div>
         </MotionWrapper>
 
-        {/* Code Snippet Style Stack */}
-        <div className="bg-gray-900/80 rounded-lg p-4 font-mono text-sm mb-6 shadow-lg">
-          <GradientLabel>Languages:</GradientLabel>
-          <span className="text-white ml-2">JavaScript, Python, PHP</span>
-          <br />
-          <GradientLabel>Frameworks:</GradientLabel>
-          <span className="text-white ml-2">React, Next.js, Vue.js, Laravel, Tailwind CSS</span>
-          <br />
-          <GradientLabel>Tools:</GradientLabel>
-          <span className="text-white ml-2">GitHub, Stripe, Firebase, AWS</span>
-        </div>
+
 
         {/* Main Content */}
         <div className="space-y-6 text-base sm:text-lg">
